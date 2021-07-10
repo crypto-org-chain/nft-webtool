@@ -3,9 +3,9 @@ import './welcome.less';
 import 'antd/dist/antd.css';
 import { Button } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
+import { PlusCircleOutlined } from '@ant-design/icons';
 import logo from '../../assets/logo-products-chain.svg';
 import keplr from '../../assets/image2vector.svg';
-import { PlusCircleOutlined } from '@ant-design/icons';
 
 function WelcomePage() {
 

@@ -4,7 +4,6 @@ import './nft.less';
 import 'antd/dist/antd.css';
 import {
   Layout,
-  Card,
   Tabs,
   Radio,
   Button,
@@ -15,32 +14,26 @@ import {
   Spin,
   message,
   notification,
-  Typography, Space, Select
+  Typography, Select
 } from 'antd';
 import Big from 'big.js';
 import {
-  MenuOutlined,
   ExclamationCircleOutlined,
   UploadOutlined,
   LoadingOutlined,
   WarningOutlined,
-  CheckCircleOutlined,
 } from '@ant-design/icons';
-import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useRecoilState } from 'recoil';
 import ReactPlayer from 'react-player';
 import axios from 'axios';
 
 import {
   sessionState,
-  nftListState,
-  fetchingDBState,
   walletAssetState,
   ledgerIsExpertModeState,
 } from '../../recoil/atom';
 import {
   convertIpfsToHttp,
-  sleep,
-  useWindowSize,
 } from '../../utils/utils';
 import { getUINormalScaleAmount } from '../../utils/NumberUtils';
 import { BroadCastResult } from '../../models/Transaction';
@@ -55,18 +48,10 @@ import {
 } from '../../config/StaticConfig';
 
 import { walletService } from '../../service/WalletService';
-import { detectConditionsError, LEDGER_WALLET_TYPE } from '../../service/LedgerService';
-// import {
-//   AnalyticsActions,
-//   AnalyticsCategory,
-//   // AnalyticsService,
-//   AnalyticsTxType,
-// } from '../../service/analytics/AnalyticsService';
 
 import ModalPopup from '../../components/ModalPopup/ModalPopup';
 import SuccessModalPopup from '../../components/SuccessModalPopup/SuccessModalPopup';
 import ErrorModalPopup from '../../components/ErrorModalPopup/ErrorModalPopup';
-import PasswordFormModal from '../../components/PasswordForm/PasswordFormModal';
 import nftThumbnail from '../../assets/nft-thumbnail.png';
 
 const { Option } = Select;
@@ -136,7 +121,7 @@ const FormMintNft = (props: { keplr: Keplr, keplrSigner: string | undefined }) =
   const [files, setFiles] = useState<any[]>([]);
   const [fileType, setFileType] = useState('');
 
-  const [decryptedPhrase, setDecryptedPhrase] = useState('');
+  const [, setDecryptedPhrase] = useState('');
   const [broadcastResult, setBroadcastResult] = useState<BroadCastResult>({});
   const [errorMessages, setErrorMessages] = useState([]);
 
@@ -160,27 +145,6 @@ const FormMintNft = (props: { keplr: Keplr, keplrSigner: string | undefined }) =
     setIsErrorModalVisible(false);
   };
 
-  const fileUploadValidator = () => ({
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    validator(rule, value) {
-      const reason = `File upload failed. Please upload again.`;
-      if (
-        (isUploadSuccess && !isVideo(fileType) && files.length === 1) ||
-        (isUploadSuccess && isVideo(fileType) && files.length === 2)
-      ) {
-        return Promise.resolve();
-      }
-      // Hide the error before uploading anything
-      if (isBeforeUpload) {
-        return Promise.reject();
-      }
-      // Hide the error when uploading or upload video in progress
-      if (isUploading || (files.length === 1 && isVideo(fileType))) {
-        return Promise.reject();
-      }
-      return Promise.reject(reason);
-    },
-  });
 
   const showConfirmationModal = async () => {
     setInputPasswordVisible(false);
@@ -190,15 +154,12 @@ const FormMintNft = (props: { keplr: Keplr, keplrSigner: string | undefined }) =
       senderAddress: keplrSigner,
       recipientAddress: keplrSigner,
     });
-    console.log('fetching deonom')
     const denomData = await walletService.getDenomIdData(form.getFieldValue('denomId'));
-    console.log('fetching denom:', denomData)
 
     if (denomData) {
       // Denom ID registered
       setIsDenomIdIssued(true);
       if (denomData.denomCreator === keplrSigner) {
-        console.log('denomData.denomCreator === keplrSigner', denomData.denomCreator === keplrSigner)
         setIsDenomIdOwner(true);
       } else {
         setIsDenomIdOwner(false);
@@ -211,10 +172,6 @@ const FormMintNft = (props: { keplr: Keplr, keplrSigner: string | undefined }) =
   };
 
   const onWalletDecryptFinish = async () => {
-    // const phraseDecrypted = await secretStoreService.decryptPhrase(
-    //   password,
-    //   currentSession.wallet.identifier,
-    // );
     const phraseDecrypted = 'somepharsase';
     setDecryptedPhrase(phraseDecrypted);
     await showConfirmationModal();
@@ -297,7 +254,6 @@ const FormMintNft = (props: { keplr: Keplr, keplrSigner: string | undefined }) =
       setConfirmLoading(true);
 
       if (!isDenomIdIssued) {
-        console.log('Denom not issued')
         throw new Error('The Denom ID you entered is not existent. Please input another denom-id.');
       } else {
         const mintNftResult = await walletService.broadcastMintNFT({
@@ -312,7 +268,6 @@ const FormMintNft = (props: { keplr: Keplr, keplrSigner: string | undefined }) =
           keplr,
           walletType,
         });
-        console.log('mintNftResult', mintNftResult)
         setBroadcastResult(mintNftResult);
         setIsSuccessModalVisible(true);
       }
@@ -559,7 +514,7 @@ const FormMintNft = (props: { keplr: Keplr, keplrSigner: string | undefined }) =
                   indicator={<LoadingOutlined />}
                   style={{ left: 'auto', marginRight: '5px' }}
                 />{' '}
-                Please wait until `file` upload finishes
+                Please wait until file upload finishes
               </>
             ) : (
                 ''
@@ -588,7 +543,7 @@ const FormMintNft = (props: { keplr: Keplr, keplrSigner: string | undefined }) =
               type="primary"
               onClick={onMintNft}
               loading={confirmLoading}
-              disabled={(!isDenomIdIssued && !isDenomIdOwner) || (typeof keplr === "undefined")}
+              disabled={!isDenomIdIssued || !isDenomIdOwner || (typeof keplr === "undefined")}
             >
               Confirm
             </Button>,
@@ -661,7 +616,7 @@ const FormMintNft = (props: { keplr: Keplr, keplrSigner: string | undefined }) =
                       <ExclamationCircleOutlined style={{ color: '#f27474' }} />
                     </Sider>
                     <Content>
-                      The Denom ID is either not registered or owned by other address.
+                      Please issue the denom first!
                     </Content>
                   </Layout>
                 </div>
@@ -771,25 +726,23 @@ const FormIssueDenom = (props: { keplr: Keplr, keplrSigner: string | undefined }
   });
   const currentSession = useRecoilValue(sessionState);
   const [walletAsset] = useRecoilState(walletAssetState);
-  const [ledgerIsExpertMode, setLedgerIsExpertMode] = useRecoilState(ledgerIsExpertModeState);
-
+  
   const [isConfirmationModalVisible, setIsVisibleConfirmationModal] = useState(false);
   const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
-  const [, setIsUploadButtonVisible] = useState(true);
   const [, setInputPasswordVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
-
+  
   const [isDenomIdOwner, setIsDenomIdOwner] = useState(false);
   const [isDenomIdIssued, setIsDenomIdIssued] = useState(false);
-
+  
   const [isVideoSchema, setIsVideoSchema] = useState(false);
   const [, setImageUrl] = useState('');
   const [, setVideoUrl] = useState('');
   const [, setFiles] = useState<any[]>([]);
   const [, setFileType] = useState('');
 
-  const [decryptedPhrase, setDecryptedPhrase] = useState('');
+  const [, setDecryptedPhrase] = useState('');
   const [broadcastResult, setBroadcastResult] = useState<BroadCastResult>({});
   const [errorMessages, setErrorMessages] = useState([]);
   const { keplr, keplrSigner } = props;
@@ -821,9 +774,7 @@ const FormIssueDenom = (props: { keplr: Keplr, keplrSigner: string | undefined }
       ...form.getFieldsValue(true),
       sender: keplrSigner
     });
-    console.log('fetching deonom')
     const denomData = await walletService.getDenomIdData(form.getFieldValue('denomId'));
-    console.log('fetching denom:', denomData)
 
     if (denomData) {
       // Denom ID registered
@@ -1093,7 +1044,6 @@ const FormIssueDenom = (props: { keplr: Keplr, keplrSigner: string | undefined }
           </Button>,
         ]}
       >
-        {console.log(broadcastResult)}
         <>
           {
             broadcastResult?.code !== undefined &&
@@ -1146,7 +1096,7 @@ const NftPage = () => {
 
   const [keplr, setKeplr] = useState<Keplr>(undefined)
   const [keplrSigner, setKeplrSigner] = useState<string>(undefined)
-  const [connectToKeplrClicked, setConnectToKeplrClicked] = useState<boolean>(false)
+  const [connectToKeplrClicked] = useState<boolean>(false)
   const didMountRef = useRef(false);
 
   const errKeplrConnectNotif = () => {
@@ -1176,8 +1126,6 @@ const NftPage = () => {
       setKeplr(window.keplr);
       const keplrSignerFirst = (await window.keplr.getOfflineSigner(chainId).getAccounts())[0].address;
       setKeplrSigner(keplrSignerFirst);
-      console.log('Keplr from state', keplr)
-      console.log('KeplrSigner from state', keplrSigner)
       connectionSuccess()
     }
   }
@@ -1192,28 +1140,18 @@ const NftPage = () => {
   return (
     <Layout className="site-layout">
       <Header className="site-layout-background">
-        {
-          // (typeof keplr === "undefined") ?
-          //   (<Button type="ghost" shape="round" size="small" onClick={async () => {
-          //     await handleKeplrConnect()
-          //     setConnectToKeplrClicked(!connectToKeplrClicked)
-          //   }}>
-          //     Connect to Keplr
-          //   </Button>) : (
-          //     <Button type="primary" shape="round" size="small" icon={<CheckCircleOutlined />} color="#ffff">
-          //       You are connected ({keplrSigner})
-          //     </Button>)
-          <Select placeholder="Select your network" style={{ width: "auto" }} onChange={handleKeplrConnect}>
+        <Select placeholder="Select your network" style={{ width: "auto" }} onChange={handleKeplrConnect}>
             <Option value="testnet3">TestNetCroeseid3</Option>
             <Option value="testnet2" disabled>TestNetCroeseid2</Option>
             <Option value="mainnet" disabled>Mainnet</Option>
           </Select>
-        }
 
       </Header>
 
       <div className="header-description">
-        An overview of your NFT Collection on Crypto.org Chain.
+        An overview of your NFT Collection on <strong>{(typeof keplr === "undefined") ?
+          "Crypto.org" :
+          chainInfoCroeseid3.chainName}</strong> Chain.
       </div>
       <Content>
         <Tabs defaultActiveKey="1">

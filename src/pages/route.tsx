@@ -5,7 +5,6 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
-import HomePage from './home/home';
 import WelcomePage from './welcome/welcome';
 import NftPage from './nft/nft';
 import HomeLayout from '../layouts/home/home';
@@ -29,40 +28,12 @@ function RouteHub() {
     component: <WelcomePage />,
   };
 
-  const routeItems = []
-
-  // const routeItems = [
-  //   {
-  //     name: 'Welcome Page',
-  //     key: 'welcome',
-  //     path: '/welcome',
-  //     component: <WelcomePage />,
-  //   },
-  //   {
-  //     name: 'Restore Page',
-  //     key: 'restore',
-  //     path: '/restore',
-  //     component: <RestorePage />,
-  //   },
-  //   {
-  //     name: 'Create Page',
-  //     key: 'create',
-  //     path: '/create',
-  //     component: <CreatePage />,
-  //   },
-  //   {
-  //     name: 'Backup Page',
-  //     key: 'backup',
-  //     path: '/create/backup',
-  //     component: <BackupPage />,
-  //   },
-  //   {
-  //     name: 'SignUp Page',
-  //     key: 'signUp',
-  //     path: '/signUp',
-  //     component: <SignUpPage />,
-  //   },
-  // ];
+  const routeItems = [{
+    name: 'Welcome Page',
+    key: 'welcome',
+    path: '/',
+    component: <WelcomePage />,
+  }]
 
   const routeHomeLayoutItems = [
     {
@@ -71,12 +42,6 @@ function RouteHub() {
       path: '/nft',
       component: <NftPage />,
     },
-    {
-      name: 'Welcome Page',
-      key: 'welcome',
-      path: '/welcome',
-      component: <WelcomePage />,
-    }
   ];
 
   return (

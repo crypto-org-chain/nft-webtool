@@ -4,7 +4,6 @@ import { Session } from '../models/Session';
 import { Wallet } from '../models/Wallet';
 import { UserAsset, AssetMarketPrice } from '../models/UserAsset';
 import { ValidatorModel, NftModel } from '../models/Transaction';
-import { NORMAL_WALLET_TYPE } from '../service/LedgerService';
 
 const wallet = new Wallet(
   '',
@@ -13,7 +12,7 @@ const wallet = new Wallet(
   DefaultWalletConfigs.TestNetCroeseid3,
   '',
   false,
-  NORMAL_WALLET_TYPE,
+  'normal',
   0, // addressIndex default
 );
 const session = new Session(wallet, 'USD');

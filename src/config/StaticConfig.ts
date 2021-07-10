@@ -226,9 +226,8 @@ export const chainInfoCroeseid3: ChainInfo =
   rpcConfig: CRYPTO_ORG_RPC_CONFIG,
   rest: CRYPTO_ORG_REST_ENDPOINT,
   restConfig: CRYPTO_ORG_REST_CONFIG,
-  // chainId: "crypto-org-chain-mainnet-1",
   chainId: "testnet-croeseid-3",
-  chainName: "Crypto.org",
+  chainName: "Crypto.org Testnet-Croeseid-3",
   stakeCurrency: {
     coinDenom: "tcro",
     coinMinimalDenom: "basetcro",

@@ -1,6 +1,6 @@
+import { Keplr } from '@keplr-wallet/types';
 import { UserAsset } from '../models/UserAsset';
 import { VoteOption } from '../models/Transaction';
-import { Keplr } from '@keplr-wallet/types';
 
 export interface TransferRequest {
   toAddress: string;
