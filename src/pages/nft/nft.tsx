@@ -388,32 +388,32 @@ const FormMintNft = (props: { keplr: Keplr, keplrSigner: string | undefined }) =
     }
 
     try {
-      // const response = await axios.post(url, formData, {
-      //   onUploadProgress: e => {
-      //     onProgress({ percent: (e.loaded / e.total) * 100 });
-      //   },
-      //   headers: {
-      //     'Content-Type': 'multipart/form-data',
-      //   },
-      // });
+      const response = await axios.post(url, formData, {
+        onUploadProgress: e => {
+          onProgress({ percent: (e.loaded / e.total) * 100 });
+        },
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
 
-      const response = {
-        data: {
-          status: 200,
-          ipfsUrl: "ipfs://bafyreigjrf6erwujlrffvjtg7yrfbl4ayfmuxyqiy3uma7joiwz333cfmu/metadata.json",
-        }
-      }
+      // const response = {
+      //   data: {
+      //     status: 200,
+      //     ipfsUrl: "ipfs://bafyreigjrf6erwujlrffvjtg7yrfbl4ayfmuxyqiy3uma7joiwz333cfmu/metadata.json",
+      //   }
+      // }
       if (response.data.status === 200) {
         const ipfsUrl = convertIpfsToHttp(response.data.ipfsUrl);
         setIpfsMediaJsonUrl(ipfsUrl);
-        // const media: any = await axios.get(ipfsUrl);
-        const media: any = {
-          data: {
-            "name": "21_STARTUP_IDEAS.jpeg",
-            "description": "21_STARTUP_IDEAS.jpeg",
-            "image": "ipfs://bafybeif2b3vw2ude53mydp46n5hdre2okzebyrxta2vgnpbv44x6xmv2r4/21_STARTUP_IDEAS.jpeg"
-          }
-        }
+        const media: any = await axios.get(ipfsUrl);
+        // const media: any = {
+        //   data: {
+        //     "name": "21_STARTUP_IDEAS.jpeg",
+        //     "description": "21_STARTUP_IDEAS.jpeg",
+        //     "image": "ipfs://bafybeif2b3vw2ude53mydp46n5hdre2okzebyrxta2vgnpbv44x6xmv2r4/21_STARTUP_IDEAS.jpeg"
+        //   }
+        // }
         setImageUrl(convertIpfsToHttp(media.data.image));
         if (media.data.animation_url) {
           setVideoUrl(convertIpfsToHttp(media.data.animation_url));

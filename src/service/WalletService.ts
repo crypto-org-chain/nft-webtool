@@ -443,11 +443,11 @@ class WalletService {
       return;
     }
 
-    await Promise.all([
-      this.syncBalancesData(currentSession),
-      this.syncTransactionsData(currentSession),
-      this.fetchAndSaveNFTs(currentSession),
-    ]);
+    // await Promise.all([
+    //   this.syncBalancesData(currentSession),
+    //   this.syncTransactionsData(currentSession),
+    //   this.fetchAndSaveNFTs(currentSession),
+    // ]);
   }
 
   public async sendStakingRewardWithdrawalTx(
@@ -1102,14 +1102,10 @@ class WalletService {
   }
 
   public async getDenomIdData(denomId: string): Promise<NftDenomModel | null> {
-    const currentSession = await this.storageService.retrieveCurrentSession();
-    if (currentSession?.wallet.config.nodeUrl === NOT_KNOWN_YET_VALUE) {
-      return Promise.resolve(null);
-    }
     try {
       // console.log('currentSession.wallet.config.indexingUrl')
       // console.log(currentSession.wallet.config.indexingUrl)
-      const chainIndexAPI = ChainIndexingAPI.init(currentSession.wallet.config.indexingUrl);
+      const chainIndexAPI = ChainIndexingAPI.init(DefaultWalletConfigs.TestNetCroeseid3.indexingUrl);
       const nftDenomData = await chainIndexAPI.fetchNftDenomData(denomId);
 
       return nftDenomData.result;

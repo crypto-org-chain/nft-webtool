@@ -6,6 +6,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import HomePage from './home/home';
+import WelcomePage from './welcome/welcome';
 import NftPage from './nft/nft';
 import HomeLayout from '../layouts/home/home';
 
@@ -23,9 +24,9 @@ const Router: React.FC<RouterProps> = props => {
 function RouteHub() {
   const routeIndex = {
     name: 'Welcome Page',
-    key: 'nft',
+    key: 'welcome',
     path: '/',
-    component: <NftPage />,
+    component: <WelcomePage />,
   };
 
   const routeItems = []
@@ -70,6 +71,12 @@ function RouteHub() {
       path: '/nft',
       component: <NftPage />,
     },
+    {
+      name: 'Welcome Page',
+      key: 'welcome',
+      path: '/welcome',
+      component: <WelcomePage />,
+    }
   ];
 
   return (
