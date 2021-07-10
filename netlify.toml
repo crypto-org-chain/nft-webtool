@@ -13,7 +13,7 @@
   publish = "build/"
 
   # Default build command.
-  command = "yarn build"
+  command = "cd revamped-ui/ && yarn build"
 
 [[plugins]]
   # Installs the Lighthouse Build Plugin for all deploy contexts
