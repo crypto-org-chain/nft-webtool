@@ -328,7 +328,6 @@ const FormMintNft = (props: { keplr: Keplr, keplrSigner: string | undefined }) =
       setFileType('');
       setIsUploadButtonVisible(true);
     } catch (e) {
-
       setErrorMessages(e.message.split(': '));
       setIsVisibleConfirmationModal(false);
       setConfirmLoading(false);
@@ -589,7 +588,7 @@ const FormMintNft = (props: { keplr: Keplr, keplrSigner: string | undefined }) =
               type="primary"
               onClick={onMintNft}
               loading={confirmLoading}
-              disabled={isDenomIdIssued && !isDenomIdOwner && (typeof keplr === "undefined")}
+              disabled={(!isDenomIdIssued && !isDenomIdOwner) || (typeof keplr === "undefined")}
             >
               Confirm
             </Button>,
@@ -655,14 +654,14 @@ const FormMintNft = (props: { keplr: Keplr, keplrSigner: string | undefined }) =
                 <div className="label">Denom ID</div>
                 <div>{`${formValues.denomId}`}</div>
               </div>
-              {(isDenomIdIssued && !isDenomIdOwner) ? (
+              {!isDenomIdIssued || !isDenomIdOwner ? (
                 <div className="item notice">
                   <Layout>
                     <Sider width="20px">
                       <ExclamationCircleOutlined style={{ color: '#f27474' }} />
                     </Sider>
                     <Content>
-                      The Denom ID is registered by another address. Please use another Denom Id.
+                      The Denom ID is either not registered or owned by other address.
                     </Content>
                   </Layout>
                 </div>
@@ -900,7 +899,6 @@ const FormIssueDenom = (props: { keplr: Keplr, keplrSigner: string | undefined }
       setFiles([]);
       setFileType('');
     } catch (e) {
-
       setErrorMessages(e.message.split(': '));
       setIsVisibleConfirmationModal(false);
       setConfirmLoading(false);
