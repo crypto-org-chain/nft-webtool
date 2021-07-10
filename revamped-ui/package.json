@@ -73,7 +73,7 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "yarn clean-builds && node scripts/build.js",
+    "build": "yarn add eslint-config-react-app && yarn clean-builds && node scripts/build.js",
     "test": "node scripts/test.js --watchAll=false",
     "postinstall": "electron-builder install-app-deps",
     "electron:dev": "export NODE_ENV=development && yarn electron:devcore",
