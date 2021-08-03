@@ -4,7 +4,7 @@
   "description": "Crypto.org Keplr NFT Manager",
   "author": "Crypto.org <chain@crypto.org>",
   "license": "Apache-2.0",
-  "homepage": ".",
+  "homepage": "https://cdc-hitesh.github.io/",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
@@ -50,7 +50,7 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "yarn add eslint-config-react-app && yarn clean-builds && node scripts/build.js",
+    "build": "yarn clean-builds && node scripts/build.js",
     "test": "node scripts/test.js --watchAll=false",
     "clean-builds": "rimraf build && rimraf dist",
     "electron:build": "yarn clean-builds && yarn build && yarn copy-macos-manifest && tsc -p electron && electron-builder --publish=never",
