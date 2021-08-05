@@ -2,7 +2,7 @@
 
 ## Warning
 
-Crypto.org Chain NFT Manager Example Code is currently in the alpha development phase and subjects to changes. Before proceeding, please be aware of the following:
+Crypto.org Chain NFT Manager Example Code is currently in the alpha development phase and subject to changes. Before proceeding, please be aware of the following:
 
 - This software is not production-ready, do not use in production systems.
 
