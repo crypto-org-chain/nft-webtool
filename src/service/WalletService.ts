@@ -6,7 +6,6 @@ import { StorageService } from '../storage/StorageService';
 import {
   APP_DB_NAMESPACE,
   DefaultWalletConfigs,
-  chainInfoCroeseid3,
   typeUrlMappings,
 } from '../config/StaticConfig';
 import { AssetMarketPrice } from '../models/UserAsset';
@@ -19,11 +18,6 @@ import {
   NFTDenomIssueRequest,
   NFTMintRequest,
 } from './TransactionRequestModels';
-
-
-import {
-  reconstructCustomConfig,
-} from '../models/Wallet';
 
 class CustomSigningOptions implements SigningStargateClientOptions {
   public registry;
@@ -55,8 +49,8 @@ class WalletService {
     });
 
     const signClient = await SigningStargateClient.connectWithSigner(
-      chainInfoCroeseid3.rpc
-      , nftMintRequest.keplr.getOfflineSigner(chainInfoCroeseid3.chainId), new CustomSigningOptions());
+      nftMintRequest.chainInfo.rpc
+      , nftMintRequest.keplr.getOfflineSigner(nftMintRequest.chainInfo.chainId), new CustomSigningOptions());
 
     const broadcastResult = await signClient.signAndBroadcast(nftMintRequest.sender, [msgMintNFT.toRawMsg()], { amount: [{ amount: '200000', denom: 'basetcro' }], gas: '100000' }, nftMintRequest.memo)
 
@@ -79,8 +73,8 @@ class WalletService {
     });
 
     const signClient = await SigningStargateClient.connectWithSigner(
-      chainInfoCroeseid3.rpc
-      , nftDenomIssueRequest.keplr.getOfflineSigner(chainInfoCroeseid3.chainId), new CustomSigningOptions());
+      nftDenomIssueRequest.chainInfo.rpc
+      , nftDenomIssueRequest.keplr.getOfflineSigner(nftDenomIssueRequest.chainInfo.chainId), new CustomSigningOptions());
 
     const broadcastResult = await signClient.signAndBroadcast(nftDenomIssueRequest.sender, [msgIssueDenom.toRawMsg()], { amount: [{ amount: '200000', denom: 'basetcro' }], gas: '100000' }, nftDenomIssueRequest.memo)
 
