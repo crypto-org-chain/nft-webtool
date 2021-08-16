@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Keplr } from "@keplr-wallet/types";
+import { Keplr, ChainInfo } from "@keplr-wallet/types";
 import './nft.less';
 import 'antd/dist/antd.css';
 import {
@@ -45,6 +45,7 @@ import {
   MAX_IMAGE_SIZE,
   MAX_VIDEO_SIZE,
   chainInfoCroeseid3,
+  chainInfoCROMainnet,
 } from '../../config/StaticConfig';
 
 import { walletService } from '../../service/WalletService';
@@ -84,8 +85,8 @@ const multiplyFee = (fee: string, multiply: number) => {
     .toString();
 };
 
-const FormMintNft = (props: { keplr: Keplr, keplrSigner: string | undefined }) => {
-  const { keplr, keplrSigner } = props;
+const FormMintNft = (props: { keplr: Keplr, keplrSigner: string | undefined, activeChainInfo: ChainInfo }) => {
+  const { keplr, keplrSigner, activeChainInfo } = props;
   const [form] = Form.useForm();
   const [formValues, setFormValues] = useState({
     fileList: '',
@@ -267,6 +268,7 @@ const FormMintNft = (props: { keplr: Keplr, keplrSigner: string | undefined }) =
           memo,
           keplr,
           walletType,
+          chainInfo: activeChainInfo
         });
         setBroadcastResult(mintNftResult);
         setIsSuccessModalVisible(true);
@@ -642,7 +644,8 @@ const FormMintNft = (props: { keplr: Keplr, keplrSigner: string | undefined }) =
               <div className="item">
                 <div className="label">Transaction Fee</div>
                 <div>
-                  {parseInt(networkFee, 10) / 1e8} {chainInfoCroeseid3.feeCurrencies[0].coinDenom}
+                  {parseInt(networkFee, 10) / 1e8} {
+                    (activeChainInfo) ? activeChainInfo.feeCurrencies[0].coinDenom : ''}
                 </div>
               </div>
               <div className="item notice">
@@ -715,7 +718,7 @@ const FormMintNft = (props: { keplr: Keplr, keplrSigner: string | undefined }) =
   );
 };
 
-const FormIssueDenom = (props: { keplr: Keplr, keplrSigner: string | undefined }) => {
+const FormIssueDenom = (props: { keplr: Keplr, keplrSigner: string | undefined, activeChainInfo: ChainInfo }) => {
   const [form] = Form.useForm();
   const [formValues, setFormValues] = useState({
     name: '',
@@ -726,16 +729,16 @@ const FormIssueDenom = (props: { keplr: Keplr, keplrSigner: string | undefined }
   });
   const currentSession = useRecoilValue(sessionState);
   const [walletAsset] = useRecoilState(walletAssetState);
-  
+
   const [isConfirmationModalVisible, setIsVisibleConfirmationModal] = useState(false);
   const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
   const [, setInputPasswordVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
-  
+
   const [isDenomIdOwner, setIsDenomIdOwner] = useState(false);
   const [isDenomIdIssued, setIsDenomIdIssued] = useState(false);
-  
+
   const [isVideoSchema, setIsVideoSchema] = useState(false);
   const [, setImageUrl] = useState('');
   const [, setVideoUrl] = useState('');
@@ -745,7 +748,7 @@ const FormIssueDenom = (props: { keplr: Keplr, keplrSigner: string | undefined }
   const [, setDecryptedPhrase] = useState('');
   const [broadcastResult, setBroadcastResult] = useState<BroadCastResult>({});
   const [errorMessages, setErrorMessages] = useState([]);
-  const { keplr, keplrSigner } = props;
+  const { keplr, keplrSigner, activeChainInfo } = props;
 
   useEffect(() => {
     // getInjectedKeplr();
@@ -829,6 +832,7 @@ const FormIssueDenom = (props: { keplr: Keplr, keplrSigner: string | undefined }
           memo,
           keplr,
           walletType,
+          chainInfo: activeChainInfo
         });
         setBroadcastResult(issueDenomResult);
         setIsSuccessModalVisible(true);
@@ -997,7 +1001,8 @@ const FormIssueDenom = (props: { keplr: Keplr, keplrSigner: string | undefined }
               <div className="item">
                 <div className="label">Transaction Fee</div>
                 <div>
-                  {parseInt(networkFee, 10) / 1e8} {chainInfoCroeseid3.feeCurrencies[0].coinDenom}
+                  {parseInt(networkFee, 10) / 1e8} {
+                    (activeChainInfo) ? activeChainInfo.feeCurrencies[0].coinDenom : ''}
                 </div>
               </div>
               {!networkFee ? (
@@ -1096,6 +1101,7 @@ const NftPage = () => {
 
   const [keplr, setKeplr] = useState<Keplr>(undefined)
   const [keplrSigner, setKeplrSigner] = useState<string>(undefined)
+  const [activeChainInfo, setActiveChainInfo] = useState<ChainInfo>(undefined)
   const [connectToKeplrClicked] = useState<boolean>(false)
   const didMountRef = useRef(false);
 
@@ -1112,8 +1118,16 @@ const NftPage = () => {
     message.success('Connected with Keplr, Successfully.', 4);
   };
 
-  const handleKeplrConnect = async () => {
-    const { chainId } = chainInfoCroeseid3;
+  const handleKeplrConnect = async (croNetwork: string) => {
+    let { chainId } = chainInfoCroeseid3;
+    let isMainnet = false;
+
+    if (croNetwork && croNetwork === 'mainnet') {
+      chainId = chainInfoCROMainnet.chainId;
+      isMainnet = true;
+      setActiveChainInfo(chainInfoCROMainnet);
+    }
+
     if (document.readyState === "complete" && typeof window.keplr === "undefined") {
       // alert("Please install keplr extension");
       setKeplr(undefined);
@@ -1121,7 +1135,10 @@ const NftPage = () => {
     }
 
     if (window.keplr) {
-      await window.keplr.experimentalSuggestChain(chainInfoCroeseid3)
+      if (!isMainnet) {
+        await window.keplr.experimentalSuggestChain(chainInfoCroeseid3)
+        setActiveChainInfo(chainInfoCroeseid3);
+      }
       await window.keplr.enable(chainId)
       setKeplr(window.keplr);
       const keplrSignerFirst = (await window.keplr.getOfflineSigner(chainId).getAccounts())[0].address;
@@ -1141,17 +1158,17 @@ const NftPage = () => {
     <Layout className="site-layout">
       <Header className="site-layout-background">
         <Select placeholder="Select your network" style={{ width: "auto" }} onChange={handleKeplrConnect}>
-            <Option value="testnet3">TestNetCroeseid3</Option>
-            <Option value="testnet2" disabled>TestNetCroeseid2</Option>
-            <Option value="mainnet" disabled>Mainnet</Option>
-          </Select>
+          <Option value="testnet3">Croeseid-3 Testnet</Option>
+          <Option value="mainnet">Mainnet</Option>
+          <Option value="testnet2" disabled>Croeseid-2 Testnet</Option>
+        </Select>
 
       </Header>
 
       <div className="header-description">
         An overview of your NFT Collection on <strong>{(typeof keplr === "undefined") ?
           "Crypto.org" :
-          chainInfoCroeseid3.chainName}</strong> Chain.
+          activeChainInfo.chainName}</strong> Chain.
       </div>
       <Content>
         <Tabs defaultActiveKey="1">
@@ -1162,7 +1179,7 @@ const NftPage = () => {
                 <div className="description">
                   Mint your NFT with Image or Video on Crypto.org chain.
                 </div>
-                <FormMintNft keplr={keplr} keplrSigner={keplrSigner} />
+                <FormMintNft keplr={keplr} keplrSigner={keplrSigner} activeChainInfo={activeChainInfo} />
               </div>
             </div>
           </TabPane>
@@ -1174,7 +1191,7 @@ const NftPage = () => {
                 <div className="description">
                   Issue a new denom for your NFT on Crypto.org chain.
                 </div>
-                <FormIssueDenom keplr={keplr} keplrSigner={keplrSigner} />
+                <FormIssueDenom keplr={keplr} keplrSigner={keplrSigner} activeChainInfo={activeChainInfo} />
               </div>
             </div>
           </TabPane>

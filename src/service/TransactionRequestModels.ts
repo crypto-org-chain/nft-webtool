@@ -1,4 +1,4 @@
-import { Keplr } from '@keplr-wallet/types';
+import { Keplr, ChainInfo } from '@keplr-wallet/types';
 import { UserAsset } from '../models/UserAsset';
 import { VoteOption } from '../models/Transaction';
 
@@ -42,7 +42,9 @@ export interface NFTMintRequest {
   uri: string;
 
   memo: string;
-  keplr: Keplr,
+  
+  keplr: Keplr;
+  chainInfo: ChainInfo;
   walletType: string; // normal, ledger
 }
 
@@ -53,7 +55,9 @@ export interface NFTDenomIssueRequest {
   schema: string;
 
   memo: string;
-  keplr: Keplr,
+
+  keplr: Keplr;
+  chainInfo: ChainInfo;
   walletType: string; // normal, ledger
 }
 

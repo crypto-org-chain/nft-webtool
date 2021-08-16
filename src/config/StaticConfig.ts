@@ -215,19 +215,26 @@ export type Network = {
   rpcUrl?: string;
 };
 
-const CRYPTO_ORG_RPC_ENDPOINT = "https://testnet-croeseid-3.crypto.org:26657";
+const CRYPTO_ORG_RPC = {
+  TESTNET_3_ENDPOINT: "https://testnet-croeseid-3.crypto.org:26657",
+  MAINNET_ENDPOINT: "https://mainnet.crypto.org:26657"
+};
+const CRYPTO_ORG_REST = {
+  TESTNET_3_ENDPOINT: "https://testnet-croeseid-3.crypto.org:1317",
+  MAINNET_ENDPOINT: "https://mainnet.crypto.org:1317"
+};
+
 const CRYPTO_ORG_RPC_CONFIG: AxiosRequestConfig | undefined = undefined;
-const CRYPTO_ORG_REST_ENDPOINT = "https://testnet-croeseid-3.crypto.org:1317";
 const CRYPTO_ORG_REST_CONFIG: AxiosRequestConfig | undefined = undefined;
 
 export const chainInfoCroeseid3: ChainInfo =
 {
-  rpc: CRYPTO_ORG_RPC_ENDPOINT,
+  rpc: CRYPTO_ORG_RPC.TESTNET_3_ENDPOINT,
   rpcConfig: CRYPTO_ORG_RPC_CONFIG,
-  rest: CRYPTO_ORG_REST_ENDPOINT,
+  rest: CRYPTO_ORG_REST.TESTNET_3_ENDPOINT,
   restConfig: CRYPTO_ORG_REST_CONFIG,
   chainId: "testnet-croeseid-3",
-  chainName: "Crypto.org Testnet-Croeseid-3",
+  chainName: "Crypto.org Chain Testnet Croeseid-3",
   stakeCurrency: {
     coinDenom: "tcro",
     coinMinimalDenom: "basetcro",
@@ -271,39 +278,89 @@ export const chainInfoCroeseid3: ChainInfo =
   features: ["stargate", "ibc-transfer"],
 };
 
+export const chainInfoCROMainnet: ChainInfo =
+{
+  rpc: CRYPTO_ORG_RPC.MAINNET_ENDPOINT,
+  rpcConfig: CRYPTO_ORG_RPC_CONFIG,
+  rest: CRYPTO_ORG_REST.MAINNET_ENDPOINT,
+  restConfig: CRYPTO_ORG_REST_CONFIG,
+  chainId: "crypto-org-chain-mainnet-1",
+  chainName: "Crypto.org Mainnet",
+  stakeCurrency: {
+    coinDenom: "cro",
+    coinMinimalDenom: "basecro",
+    coinDecimals: 8,
+    coinGeckoId: "crypto-com-chain",
+  },
+  walletUrl:
+    process.env.NODE_ENV === "production"
+      ? "https://wallet.keplr.app/#/crypto-org/stake"
+      : "http://localhost:8081/#/crypto-org/stake",
+  walletUrlForStaking:
+    process.env.NODE_ENV === "production"
+      ? "https://wallet.keplr.app/#/crypto-org/stake"
+      : "http://localhost:8081/#/crypto-org/stake",
+  bip44: {
+    coinType: 394,
+  },
+  bech32Config: Bech32Address.defaultBech32Config("cro"),
+  currencies: [
+    {
+      coinDenom: "cro",
+      coinMinimalDenom: "basecro",
+      coinDecimals: 8,
+      coinGeckoId: "crypto-com-chain",
+    },
+  ],
+  feeCurrencies: [
+    {
+      coinDenom: "cro",
+      coinMinimalDenom: "basecro",
+      coinDecimals: 8,
+      coinGeckoId: "crypto-com-chain",
+    },
+  ],
+  gasPriceStep: {
+    low: 0.025,
+    average: 0.03,
+    high: 0.04,
+  },
+  features: ["stargate", "ibc-transfer"],
+};
+
 export interface GeneratedType {
-    readonly create: (properties?: {
-        [k: string]: any;
-    }) => any;
-    readonly encode: (message: any | {
-        [k: string]: any;
-    }, writer?: protobuf.Writer) => protobuf.Writer;
-    readonly decode: (reader: protobuf.Reader | Uint8Array, length?: number) => any;
+  readonly create: (properties?: {
+    [k: string]: any;
+  }) => any;
+  readonly encode: (message: any | {
+    [k: string]: any;
+  }, writer?: protobuf.Writer) => protobuf.Writer;
+  readonly decode: (reader: protobuf.Reader | Uint8Array, length?: number) => any;
 }
 
 export const typeUrlMappings: {
-    [key: string]: GeneratedType;
+  [key: string]: GeneratedType;
 } = {
-    '/cosmos.base.v1beta1.Coin': cosmos.base.v1beta1.Coin,
-    '/cosmos.bank.v1beta1.MsgSend': cosmos.bank.v1beta1.MsgSend,
-    '/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward': cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward,
-    '/cosmos.staking.v1beta1.MsgCreateValidator': cosmos.staking.v1beta1.MsgCreateValidator,
-    '/cosmos.staking.v1beta1.MsgBeginRedelegate': cosmos.staking.v1beta1.MsgBeginRedelegate,
-    '/cosmos.staking.v1beta1.MsgEditValidator': cosmos.staking.v1beta1.MsgEditValidator,
-    '/cosmos.staking.v1beta1.MsgDelegate': cosmos.staking.v1beta1.MsgDelegate,
-    '/cosmos.staking.v1beta1.MsgUndelegate': cosmos.staking.v1beta1.MsgUndelegate,
-    '/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission': cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission,
-    '/cosmos.crypto.ed25519.PubKey': cosmos.crypto.ed25519.PubKey,
-    '/cosmos.crypto.secp256k1.PubKey': cosmos.crypto.secp256k1.PubKey,
-    '/cosmos.gov.v1beta1.MsgDeposit': cosmos.gov.v1beta1.MsgDeposit,
-    '/cosmos.gov.v1beta1.MsgVote': cosmos.gov.v1beta1.MsgVote,
-    '/cosmos.gov.v1beta1.MsgSubmitProposal': cosmos.gov.v1beta1.MsgSubmitProposal,
-    '/google.protobuf.Any': google.protobuf.Any,
-    '/cosmos.distribution.v1beta1.MsgSetWithdrawAddress': cosmos.distribution.v1beta1.MsgSetWithdrawAddress,
-    '/cosmos.distribution.v1beta1.MsgFundCommunityPool': cosmos.distribution.v1beta1.MsgFundCommunityPool,
-    '/chainmain.nft.v1.MsgIssueDenom': chainmain.nft.v1.MsgIssueDenom,
-    '/chainmain.nft.v1.MsgMintNFT': chainmain.nft.v1.MsgMintNFT,
-    '/chainmain.nft.v1.MsgEditNFT': chainmain.nft.v1.MsgEditNFT,
-    '/chainmain.nft.v1.MsgTransferNFT': chainmain.nft.v1.MsgTransferNFT,
-    '/chainmain.nft.v1.MsgBurnNFT': chainmain.nft.v1.MsgBurnNFT,
+  '/cosmos.base.v1beta1.Coin': cosmos.base.v1beta1.Coin,
+  '/cosmos.bank.v1beta1.MsgSend': cosmos.bank.v1beta1.MsgSend,
+  '/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward': cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward,
+  '/cosmos.staking.v1beta1.MsgCreateValidator': cosmos.staking.v1beta1.MsgCreateValidator,
+  '/cosmos.staking.v1beta1.MsgBeginRedelegate': cosmos.staking.v1beta1.MsgBeginRedelegate,
+  '/cosmos.staking.v1beta1.MsgEditValidator': cosmos.staking.v1beta1.MsgEditValidator,
+  '/cosmos.staking.v1beta1.MsgDelegate': cosmos.staking.v1beta1.MsgDelegate,
+  '/cosmos.staking.v1beta1.MsgUndelegate': cosmos.staking.v1beta1.MsgUndelegate,
+  '/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission': cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission,
+  '/cosmos.crypto.ed25519.PubKey': cosmos.crypto.ed25519.PubKey,
+  '/cosmos.crypto.secp256k1.PubKey': cosmos.crypto.secp256k1.PubKey,
+  '/cosmos.gov.v1beta1.MsgDeposit': cosmos.gov.v1beta1.MsgDeposit,
+  '/cosmos.gov.v1beta1.MsgVote': cosmos.gov.v1beta1.MsgVote,
+  '/cosmos.gov.v1beta1.MsgSubmitProposal': cosmos.gov.v1beta1.MsgSubmitProposal,
+  '/google.protobuf.Any': google.protobuf.Any,
+  '/cosmos.distribution.v1beta1.MsgSetWithdrawAddress': cosmos.distribution.v1beta1.MsgSetWithdrawAddress,
+  '/cosmos.distribution.v1beta1.MsgFundCommunityPool': cosmos.distribution.v1beta1.MsgFundCommunityPool,
+  '/chainmain.nft.v1.MsgIssueDenom': chainmain.nft.v1.MsgIssueDenom,
+  '/chainmain.nft.v1.MsgMintNFT': chainmain.nft.v1.MsgMintNFT,
+  '/chainmain.nft.v1.MsgEditNFT': chainmain.nft.v1.MsgEditNFT,
+  '/chainmain.nft.v1.MsgTransferNFT': chainmain.nft.v1.MsgTransferNFT,
+  '/chainmain.nft.v1.MsgBurnNFT': chainmain.nft.v1.MsgBurnNFT,
 };
