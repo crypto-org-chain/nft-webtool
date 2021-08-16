@@ -14,7 +14,7 @@ Crypto.org Chain NFT Manager Example Code is currently in the alpha development 
 
 This is a webtool example to manage your NFTs on Crypto.org Chain with [Keplr wallet](https://wallet.keplr.app/).
 
-Note: We support `Croeseid-3 Testnet` and `crypto-org-chain-mainnet-1`
+Note: The webtool supports both `Croeseid-3 Testnet` and `Mainnet` as an example.
 
 A deployed version is availabe at https://automatic-enigma-d41a97d9.pages.github.io/
 ### Pre-requisites:
