@@ -1160,7 +1160,7 @@ const NftPage = () => {
         <Select placeholder="Select your network" style={{ width: "auto" }} onChange={handleKeplrConnect}>
           <Option value="testnet3">Croeseid-3 Testnet</Option>
           <Option value="mainnet">Mainnet</Option>
-          <Option value="testnet2" disabled>Croeseid 2 Testnet</Option>
+          <Option value="testnet2" disabled>Croeseid-2 Testnet</Option>
         </Select>
 
       </Header>
