@@ -241,14 +241,6 @@ export const chainInfoCroeseid3: ChainInfo =
     coinDecimals: 8,
     coinGeckoId: "crypto-com-chain",
   },
-  walletUrl:
-    process.env.NODE_ENV === "production"
-      ? "https://wallet.keplr.app/#/crypto-org/stake"
-      : "http://localhost:8081/#/crypto-org/stake",
-  walletUrlForStaking:
-    process.env.NODE_ENV === "production"
-      ? "https://wallet.keplr.app/#/crypto-org/stake"
-      : "http://localhost:8081/#/crypto-org/stake",
   bip44: {
     // coinType: 394,
     coinType: 1,
