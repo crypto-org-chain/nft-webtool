@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.js": "/static/js/main.d05fef82.chunk.js",
-    "main.js.map": "/static/js/main.d05fef82.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.0f64d159.js",
-    "runtime-main.js.map": "/static/js/runtime-main.0f64d159.js.map",
-    "static/css/2.8a94f959.chunk.css": "/static/css/2.8a94f959.chunk.css",
-    "static/js/2.b84e8fe8.chunk.js": "/static/js/2.b84e8fe8.chunk.js",
-    "static/js/2.b84e8fe8.chunk.js.map": "/static/js/2.b84e8fe8.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/2.8a94f959.chunk.css.map": "/static/css/2.8a94f959.chunk.css.map",
-    "static/js/2.b84e8fe8.chunk.js.LICENSE.txt": "/static/js/2.b84e8fe8.chunk.js.LICENSE.txt",
-    "static/media/bg-pattern.svg": "/static/media/bg-pattern.ed42e1f4.svg",
-    "static/media/image2vector.1db8c1f1.svg": "/static/media/image2vector.1db8c1f1.svg",
-    "static/media/logo-products-chain.svg": "/static/media/logo-products-chain.8e70c915.svg",
-    "static/media/nft-thumbnail.eeedcc4a.png": "/static/media/nft-thumbnail.eeedcc4a.png"
+    "main.js": "/nft-webtool/static/js/main.2aacab8a.chunk.js",
+    "main.js.map": "/nft-webtool/static/js/main.2aacab8a.chunk.js.map",
+    "runtime-main.js": "/nft-webtool/static/js/runtime-main.4c59c519.js",
+    "runtime-main.js.map": "/nft-webtool/static/js/runtime-main.4c59c519.js.map",
+    "static/css/2.8a94f959.chunk.css": "/nft-webtool/static/css/2.8a94f959.chunk.css",
+    "static/js/2.1389dac0.chunk.js": "/nft-webtool/static/js/2.1389dac0.chunk.js",
+    "static/js/2.1389dac0.chunk.js.map": "/nft-webtool/static/js/2.1389dac0.chunk.js.map",
+    "index.html": "/nft-webtool/index.html",
+    "static/css/2.8a94f959.chunk.css.map": "/nft-webtool/static/css/2.8a94f959.chunk.css.map",
+    "static/js/2.1389dac0.chunk.js.LICENSE.txt": "/nft-webtool/static/js/2.1389dac0.chunk.js.LICENSE.txt",
+    "static/media/bg-pattern.svg": "/nft-webtool/static/media/bg-pattern.ed42e1f4.svg",
+    "static/media/image2vector.1db8c1f1.svg": "/nft-webtool/static/media/image2vector.1db8c1f1.svg",
+    "static/media/logo-products-chain.svg": "/nft-webtool/static/media/logo-products-chain.8e70c915.svg",
+    "static/media/nft-thumbnail.eeedcc4a.png": "/nft-webtool/static/media/nft-thumbnail.eeedcc4a.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.0f64d159.js",
+    "static/js/runtime-main.4c59c519.js",
     "static/css/2.8a94f959.chunk.css",
-    "static/js/2.b84e8fe8.chunk.js",
-    "static/js/main.d05fef82.chunk.js"
+    "static/js/2.1389dac0.chunk.js",
+    "static/js/main.2aacab8a.chunk.js"
   ]
 }
