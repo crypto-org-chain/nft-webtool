@@ -15,8 +15,8 @@ jobs:
         env: 
           PUBLIC_URL: /nft-webtool
         run: |
-          export NODE_OPTIONS=--max_old_space_size=4096\
-          yarn install
+          export NODE_OPTIONS=--max_old_space_size=4096
+          yarn install --network-timeout 10000000
           yarn run build
 
       - name: Deploy 🚀
