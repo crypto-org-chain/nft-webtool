@@ -16,7 +16,7 @@ interface RouterProps {
 // Electron build: <HashRouter>, Web build: <BrowserRouter>
 const Router: React.FC<RouterProps> = props => {
   return (
-    <BrowserRouter>{props.children}</BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>{props.children}</BrowserRouter>
   );
 };
 
