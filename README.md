@@ -16,7 +16,7 @@ This is a webtool example to manage your NFTs on Crypto.org Chain with [Keplr wa
 
 Note: The webtool supports both `Croeseid-3 Testnet` and `Mainnet` as an example.
 
-A deployed version is availabe at https://automatic-enigma-d41a97d9.pages.github.io/
+A deployed version is availabe at https://crypto-org-chain.github.io/nft-webtool/
 ### Pre-requisites:
 
 - Browser with [Keplr Wallet Browser Extension](https://wallet.keplr.app/)
