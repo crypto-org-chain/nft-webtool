@@ -420,7 +420,7 @@ const FormMintNft = (props: { keplr: Keplr, keplrSigner: string | undefined, act
             },
             {
               pattern: /(^[a-z](([a-z0-9]){2,63})$)/,
-              message: 'Expected only alphabetic characters or numbers',
+              message: 'Expected only lowercase alphabetic characters or numbers',
             },
           ]}
         >
@@ -444,7 +444,7 @@ const FormMintNft = (props: { keplr: Keplr, keplrSigner: string | undefined, act
             },
             {
               pattern: /(^[a-z](([a-z0-9]){2,63})$)/,
-              message: 'Expected only alphabetic characters or numbers',
+              message: 'Expected only lowercase alphabetic characters or numbers',
             },
           ]}
         >
@@ -892,7 +892,7 @@ const FormIssueDenom = (props: { keplr: Keplr, keplrSigner: string | undefined, 
             },
             {
               pattern: /(^[a-z](([a-z0-9]){2,63})$)/,
-              message: 'Expected only alphabetic characters or numbers',
+              message: 'Expected only lowercase alphabetic characters or numbers',
             },
           ]}
         >
