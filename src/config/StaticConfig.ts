@@ -234,7 +234,7 @@ export const chainInfoCroeseid3: ChainInfo =
   rest: CRYPTO_ORG_REST.TESTNET_3_ENDPOINT,
   restConfig: CRYPTO_ORG_REST_CONFIG,
   chainId: "testnet-croeseid-3",
-  chainName: "Crypto.org Chain Testnet Croeseid-3",
+  chainName: "Crypto.org Testnet Croeseid-3",
   stakeCurrency: {
     coinDenom: "tcro",
     coinMinimalDenom: "basetcro",
