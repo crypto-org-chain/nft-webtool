@@ -9,7 +9,7 @@ const wallet = new Wallet(
   '',
   '',
   '',
-  DefaultWalletConfigs.TestNetCroeseid3,
+  DefaultWalletConfigs.TestNetCroeseid4,
   '',
   false,
   'normal',

@@ -44,7 +44,7 @@ import {
   NFT_VIDEO_DENOM_SCHEMA,
   MAX_IMAGE_SIZE,
   MAX_VIDEO_SIZE,
-  chainInfoCroeseid3,
+  chainInfoCroeseid4,
   chainInfoCROMainnet,
 } from '../../config/StaticConfig';
 
@@ -686,7 +686,7 @@ const FormMintNft = (props: { keplr: Keplr, keplrSigner: string | undefined, act
                     <ExclamationCircleOutlined style={{ color: '#f27474' }} />
                   </Sider>
                   <Content  >
-                    Your Mint NFT Tx has been broadcasted successfully: <Link href={`https://crypto.org/explorer/croeseid3/tx/${broadcastResult.transactionHash}`} target="_blank" >{broadcastResult.transactionHash}</Link>
+                    Your Mint NFT Tx has been broadcasted successfully: <Link href={`https://crypto.org/explorer/croeseid4/tx/${broadcastResult.transactionHash}`} target="_blank" >{broadcastResult.transactionHash}</Link>
                   </Content>
                 </Layout>
               </div>
@@ -1065,7 +1065,7 @@ const FormIssueDenom = (props: { keplr: Keplr, keplrSigner: string | undefined, 
                       <ExclamationCircleOutlined style={{ color: '#f27474' }} />
                     </Sider>
                     <Content  >
-                      Your Issue Denom Tx has been successfully broadcasted: <Link href={`https://crypto.org/explorer/croeseid3/tx/${broadcastResult.transactionHash}`} target="_blank" >{broadcastResult.transactionHash}</Link>
+                      Your Issue Denom Tx has been successfully broadcasted: <Link href={`https://crypto.org/explorer/croeseid4/tx/${broadcastResult.transactionHash}`} target="_blank" >{broadcastResult.transactionHash}</Link>
                     </Content>
                   </Layout>
                 </div>
@@ -1119,7 +1119,7 @@ const NftPage = () => {
   };
 
   const handleKeplrConnect = async (croNetwork: string) => {
-    let { chainId } = chainInfoCroeseid3;
+    let { chainId } = chainInfoCroeseid4;
     let isMainnet = false;
 
     if (croNetwork && croNetwork === 'mainnet') {
@@ -1136,8 +1136,8 @@ const NftPage = () => {
 
     if (window.keplr) {
       if (!isMainnet) {
-        await window.keplr.experimentalSuggestChain(chainInfoCroeseid3)
-        setActiveChainInfo(chainInfoCroeseid3);
+        await window.keplr.experimentalSuggestChain(chainInfoCroeseid4)
+        setActiveChainInfo(chainInfoCroeseid4);
       }
       await window.keplr.enable(chainId)
       setKeplr(window.keplr);
@@ -1158,7 +1158,7 @@ const NftPage = () => {
     <Layout className="site-layout">
       <Header className="site-layout-background">
         <Select placeholder="Select your network" style={{ width: "auto" }} onChange={handleKeplrConnect}>
-          <Option value="testnet3">Croeseid-3 Testnet</Option>
+          <Option value="testnet4">Croeseid-4 Testnet</Option>
           <Option value="mainnet">Mainnet</Option>
           <Option value="testnet2" disabled>Croeseid-2 Testnet</Option>
         </Select>

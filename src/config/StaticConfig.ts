@@ -111,14 +111,31 @@ const TestNetConfig: WalletConfig = {
   },
 };
 
-const TestNetCroeseid3: WalletConfig = {
+const croNetworkTestnetCroeseid4 = {
+  defaultNodeUrl: 'https://testnet-croeseid-4.crypto.org',
+  chainId: 'testnet-croeseid-4',
+  addressPrefix: 'tcro',
+  validatorAddressPrefix: 'tcrocncl',
+  validatorPubKeyPrefix: 'tcrocnclconspub',
+  coin: {
+    baseDenom: 'basetcro',
+    croDenom: 'tcro',
+  },
+  bip44Path: {
+    coinType: 1,
+    account: 0,
+  },
+  rpcUrl: 'https://testnet-croeseid-4.crypto.org:26657',
+};
+
+const TestNetCroeseid4: WalletConfig = {
   enabled: true,
-  name: 'TESTNET CROESEID 3',
+  name: 'TESTNET CROESEID 4',
   derivationPath: "m/44'/1'/0'/0/0",
-  explorerUrl: 'https://crypto.org/explorer/croeseid3',
-  indexingUrl: 'https://crypto.org/explorer/croeseid3/api/v1/',
-  nodeUrl: CroNetwork.TestnetCroeseid3.defaultNodeUrl,
-  network: CroNetwork.TestnetCroeseid3,
+  explorerUrl: 'https://crypto.org/explorer/croeseid4',
+  indexingUrl: 'https://crypto.org/explorer/croeseid4/api/v1/',
+  nodeUrl: croNetworkTestnetCroeseid4.defaultNodeUrl,
+  network: croNetworkTestnetCroeseid4,
   disableDefaultClientMemo: false,
   enableGeneralSettings: false,
   analyticsDisabled: false,
@@ -181,7 +198,7 @@ export const DefaultWalletConfigs = {
   TestNetConfig,
   MainNetConfig,
   CustomDevNet,
-  TestNetCroeseid3,
+  TestNetCroeseid4,
 };
 
 // Every created wallet get initialized with a new CRO asset
@@ -216,25 +233,25 @@ export type Network = {
 };
 
 const CRYPTO_ORG_RPC = {
-  TESTNET_3_ENDPOINT: "https://testnet-croeseid-3.crypto.org:26657",
+  TESTNET_4_ENDPOINT: "https://testnet-croeseid-4.crypto.org:26657",
   MAINNET_ENDPOINT: "https://mainnet.crypto.org:26657"
 };
 const CRYPTO_ORG_REST = {
-  TESTNET_3_ENDPOINT: "https://testnet-croeseid-3.crypto.org:1317",
+  TESTNET_4_ENDPOINT: "https://testnet-croeseid-4.crypto.org:1317",
   MAINNET_ENDPOINT: "https://mainnet.crypto.org:1317"
 };
 
 const CRYPTO_ORG_RPC_CONFIG: AxiosRequestConfig | undefined = undefined;
 const CRYPTO_ORG_REST_CONFIG: AxiosRequestConfig | undefined = undefined;
 
-export const chainInfoCroeseid3: ChainInfo =
+export const chainInfoCroeseid4: ChainInfo =
 {
-  rpc: CRYPTO_ORG_RPC.TESTNET_3_ENDPOINT,
+  rpc: CRYPTO_ORG_RPC.TESTNET_4_ENDPOINT,
   rpcConfig: CRYPTO_ORG_RPC_CONFIG,
-  rest: CRYPTO_ORG_REST.TESTNET_3_ENDPOINT,
+  rest: CRYPTO_ORG_REST.TESTNET_4_ENDPOINT,
   restConfig: CRYPTO_ORG_REST_CONFIG,
-  chainId: "testnet-croeseid-3",
-  chainName: "Crypto.org Testnet Croeseid-3",
+  chainId: "testnet-croeseid-4",
+  chainName: "Crypto.org Testnet Croeseid-4",
   stakeCurrency: {
     coinDenom: "tcro",
     coinMinimalDenom: "basetcro",

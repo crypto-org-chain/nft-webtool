@@ -37,7 +37,7 @@ class WalletService {
   public readonly BROADCAST_TIMEOUT_CODE = -32603;
 
   public broadcastMintNFT = async (nftMintRequest: NFTMintRequest): Promise<BroadCastResult> => {
-    const cro = CroSDK({ network: DefaultWalletConfigs.TestNetCroeseid3.network });
+    const cro = CroSDK({ network: DefaultWalletConfigs.TestNetCroeseid4.network });
     const msgMintNFT = new cro.nft.MsgMintNFT({
       id: nftMintRequest.tokenId,
       name: nftMintRequest.name,
@@ -64,7 +64,7 @@ class WalletService {
   public broadcastNFTDenomIssueTx = async (
     nftDenomIssueRequest: NFTDenomIssueRequest,
   ): Promise<BroadCastResult> => {
-    const cro = CroSDK({ network: DefaultWalletConfigs.TestNetCroeseid3.network });
+    const cro = CroSDK({ network: DefaultWalletConfigs.TestNetCroeseid4.network });
     const msgIssueDenom = new cro.nft.MsgIssueDenom({
       id: nftDenomIssueRequest.denomId,
       name: nftDenomIssueRequest.name,
@@ -113,7 +113,7 @@ class WalletService {
   // eslint-disable-next-line
   public async getDenomIdData(denomId: string): Promise<NftDenomModel | null> {
     try {
-      const chainIndexAPI = ChainIndexingAPI.init(DefaultWalletConfigs.TestNetCroeseid3.indexingUrl);
+      const chainIndexAPI = ChainIndexingAPI.init(DefaultWalletConfigs.TestNetCroeseid4.indexingUrl);
       const nftDenomData = await chainIndexAPI.fetchNftDenomData(denomId);
 
       return nftDenomData.result;
