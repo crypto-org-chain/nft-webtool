@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.js": "/nft-webtool/static/js/main.041e5724.chunk.js",
-    "main.js.map": "/nft-webtool/static/js/main.041e5724.chunk.js.map",
+    "main.js": "/nft-webtool/static/js/main.e8bcaab0.chunk.js",
+    "main.js.map": "/nft-webtool/static/js/main.e8bcaab0.chunk.js.map",
     "runtime-main.js": "/nft-webtool/static/js/runtime-main.4c59c519.js",
     "runtime-main.js.map": "/nft-webtool/static/js/runtime-main.4c59c519.js.map",
     "static/css/2.8a94f959.chunk.css": "/nft-webtool/static/css/2.8a94f959.chunk.css",
-    "static/js/2.1389dac0.chunk.js": "/nft-webtool/static/js/2.1389dac0.chunk.js",
-    "static/js/2.1389dac0.chunk.js.map": "/nft-webtool/static/js/2.1389dac0.chunk.js.map",
+    "static/js/2.3f53ea8b.chunk.js": "/nft-webtool/static/js/2.3f53ea8b.chunk.js",
+    "static/js/2.3f53ea8b.chunk.js.map": "/nft-webtool/static/js/2.3f53ea8b.chunk.js.map",
     "index.html": "/nft-webtool/index.html",
     "static/css/2.8a94f959.chunk.css.map": "/nft-webtool/static/css/2.8a94f959.chunk.css.map",
-    "static/js/2.1389dac0.chunk.js.LICENSE.txt": "/nft-webtool/static/js/2.1389dac0.chunk.js.LICENSE.txt",
+    "static/js/2.3f53ea8b.chunk.js.LICENSE.txt": "/nft-webtool/static/js/2.3f53ea8b.chunk.js.LICENSE.txt",
     "static/media/bg-pattern.svg": "/nft-webtool/static/media/bg-pattern.ed42e1f4.svg",
     "static/media/image2vector.1db8c1f1.svg": "/nft-webtool/static/media/image2vector.1db8c1f1.svg",
     "static/media/logo-products-chain.svg": "/nft-webtool/static/media/logo-products-chain.8e70c915.svg",
@@ -18,7 +18,7 @@
   "entrypoints": [
     "static/js/runtime-main.4c59c519.js",
     "static/css/2.8a94f959.chunk.css",
-    "static/js/2.1389dac0.chunk.js",
-    "static/js/main.041e5724.chunk.js"
+    "static/js/2.3f53ea8b.chunk.js",
+    "static/js/main.e8bcaab0.chunk.js"
   ]
 }
